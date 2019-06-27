@@ -1,0 +1,198 @@
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<div class="container" *ngIf="this.dbs.recipeInWork.statusDetails!=1">
+    <h3 class="orange-text">You can't add or see the ingredients before save prev step!!</h3>
+</div>
+<div *ngIf="this.dbs.recipeInWork.statusDetails==1" class="container">
+    <form class="fullWidth">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 center">
+                <h2 class="center mb-3">Ingredients:</h2>
+            </div>
+        </div>
+        <mat-list>
+
+            <div id='itemLine' *ngFor="let item of ingredients; let i = index">
+                <mat-list-item id="itemLineDetailsInSaved" class="mb-2">
+                    <strong>
+                      <label class="mr-3 responsive mb-1">{{i+1}}.</label>
+                  </strong>
+                    <!--style="width:80%; max-width:80%; text-align:left"-->
+                    <label *ngIf="item.amount!=0" class="mr-2 mb-1 responsive">{{item.amount}}</label>
+
+                    <label class="mr-2 responsive mb-1">{{item.unit}}</label>
+
+                    <label class="mr-2 responsive mb-1">{{item.product}}</label>
+
+                    <button *ngIf="!(inEditState && itemToEdit==item)" mat-mini-fab matSuffix color="orange" class="ml-auto" (click)="editItemLine(item)">
+                      <mat-icon class="mat-25" >edit</mat-icon>
+                    </button>
+
+                    <button *ngIf="!(inEditState && itemToEdit==item)" mat-mini-fab matSuffix color="orange" (click)="styleDel.show();itemToDelete=item">
+                    <mat-icon class="mat-25" >delete</mat-icon>
+                    </button>
+                </mat-list-item>
+
+                <!--              for edit:                  -->
+
+                <div class="container d-flex" id="itemLineDetailsEdit" *ngIf="inEditState && itemToEdit==item">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-6">
+                            <mat-input-container style="width:95%; margin:auto">
+                                <input matInput type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
+                            </mat-input-container>
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            <mat-input-container style="width:95%; margin:auto">
+                                <input matInput type="text" name="item.unit" placeholder="Unit" [(ngModel)]="item.unit">
+                            </mat-input-container>
+                        </div>
+                        <div class="col-md-5 col-sm-8">
+                            <mat-input-container style="width:95%; margin:auto">
+                                <input matInput type="text" name="item.product" placeholder="Product" [(ngModel)]="item.product" required>
+                                <mat-error *ngIf="!item.product">You must enter name of recipe.</mat-error>
+                            </mat-input-container>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <button mat-mini-fab color="primary" (click)="updateItemLine(item)" [disabled]="!item.product">
+            <mat-icon class="mat-25" >save</mat-icon>
+            </button>
+                            <button mat-mini-fab color="orange" (click)="styleDel.show();itemToDelete=item">
+            <mat-icon class="mat-25" >delete</mat-icon>
+            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </mat-list>
+
+
+
+        <!--                          for new item                    -->
+
+
+        <!--button mat-mini-fab matSuffix color="primary" *ngIf="newItemEnable" class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="demoBasic.show()" mdbRippleRadius>
+            <mat-icon class="mat-25" >add</mat-icon>
+            </button-->
+        <!--mat-card class="fullWidth" *ngIf="!newItemEnable">
+
+                <table style="width: 90%" cellspacing="0">
+
+                    <tr>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="number" name="nAmount" placeholder="Amount" [(ngModel)]="nAmount">
+                            </mat-input-container>
+                        </td>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="text" name="nMeasurement" placeholder="Measurement" [(ngModel)]="nMeasurement">
+                            </mat-input-container>
+                        </td>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="text" name="nProduct" placeholder="Product" [(ngModel)]="nProduct" required>
+                                <mat-error *ngIf="!nProduct">You must enter name of recipe.</mat-error>
+                            </mat-input-container>
+                        </td>
+                        <td>
+
+                        </td>
+
+                    </tr>
+                </table>
+
+
+            <button mat-mini-fab color="primary" (click)="saveItemLine()" [disabled]="!nProduct">
+
+            <mat-icon class="mat-25" >save</mat-icon>
+            </button>
+
+        </mat-card-->
+
+
+
+
+        <!--button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="demoBasic.show()" mdbRippleRadius>
+
+</button-->
+        <br>
+        <button mat-mini-fab matSuffix class="mb-3" color="primary" class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="demoBasic.show()" mdbRippleRadius>
+            <mat-icon class="mat-25" >add</mat-icon>
+            </button>
+        <div mdbModal #demoBasic="mdb-modal" class="modal  fade ground" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content modal-show">
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">New Ingredient:</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="demoBasic.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <mat-input-container>
+                                <input matInput type="number" name="nAmount" placeholder="Amount" [(ngModel)]="nAmount">
+                            </mat-input-container>
+
+                            <mat-input-container>
+                                <input matInput type="text" name="nMeasurement" placeholder="Measurement" [(ngModel)]="nMeasurement">
+                            </mat-input-container>
+
+                            <mat-input-container>
+                                <input matInput type="text" name="nProduct" placeholder="Product" [(ngModel)]="nProduct" required>
+                                <mat-error *ngIf="!nProduct">You must enter name of recipe.</mat-error>
+                            </mat-input-container>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="demoBasic.hide()" mdbRippleRadius>Cancel</button>
+                        <button type="button" class="btn btn-primary btn-sm waves-light" mdbRippleRadius (click)="saveItemLine();demoBasic.hide()" [disabled]="!nProduct">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+    <div id="itemLineDetailsInAdit" *ngSwitchCase="2">
+        <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveItemLine(i)">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+
+        <input type="number" name="item.amount" [(ngModel)]="item.amount" placeholder="Amount">
+        <input type="text" name="item.measurement" [(ngModel)]="item.measurement" placeholder="Measurement">
+        <input type="text" name="item.item" [(ngModel)]="item.item" placeholder="Food stuff">
+
+    </div>
+</div>
+</div>-->
+        <mat-divider></mat-divider>
+    </form>
+
+</div>
+
+
+<div mdbModal #styleDel="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger ground" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Are You Sure?</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="styleDel.hide()">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>Do you want delete this ingredient from your recipe?</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary-modal waves-light" mdbRippleRadius (click)="styleDel.hide(); deleteItemLine();">delete
+          <i class="fa fa-delete ml-1"></i>
+        </a>
+                <a type="button" class="btn btn-outline-secondary-modal" data-dismiss="modal" (click)="styleDel.hide(); canselFromDelete()" mdbRippleRadius>cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

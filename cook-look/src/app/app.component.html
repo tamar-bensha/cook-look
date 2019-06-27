@@ -1,0 +1,247 @@
+<div class="container-fluid ">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-orange" [containerInside]="false">
+        <logo>
+            <app-menu></app-menu>
+            <a class="logo navbar-brand" routerLink="/"><strong> Cook & look</strong></a>
+        </logo>
+        <links>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item waves-light" mdbRippleRadius *ngIf="!isLogin()" (click)="form.show()">
+                    <a class="nav-link ml-auto">login <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius *ngIf="isLogin()" (click)="logout()">
+                    <a class="nav-link ml-auto">Logout</a>
+                </li>
+
+
+            </ul>
+
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/about" mdbTooltip="Read More" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-home 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/recipeList" mdbTooltip="Recipe List" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-list 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/recipe" mdbTooltip="New Recipe" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-plus 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/share" mdbTooltip="Share" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-share 2x"></i></a>
+                </li>
+
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/categories" mdbTooltip="Categories" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-folder-open 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/galery" mdbTooltip="Galery" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-image 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/voice-setting" mdbTooltip="Setting" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-gears 2x"></i></a>
+                </li>
+                <li *ngIf="dbs.mailsForUser||dbs.user=='demoUser'" class="nav-item waves-light" mdbRippleRadius mdbTooltip="mails" placement="bottom">
+                    <a class="nav-link" (click)="mails.show()"><i class="fa fa-envelope fa-x animated swing infinite"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius [matMenuTriggerFor]="search" mdbTooltip="Search" placement="bottom">
+
+                    <a class="nav-link dropdown-toggle" id="navbarSearcMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-search 2x"></i></a>
+                    <mat-menu #search="matMenu">
+                        <button mat-menu-item routerLink="/search-by-keywords">By Product</button>
+                        <button mat-menu-item routerLink="/search-by-categories">By Category</button>
+
+                    </mat-menu>
+                </li>
+
+
+
+
+            </ul>
+        </links>
+
+    </mdb-navbar>
+</div>
+
+<main>
+    <div class="container">
+        <router-outlet style="background: black"></router-outlet>
+    </div>
+</main>
+
+
+<!--div mdbModal #frame="mdb-modal" [class]="modeClass" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" [config]="{backdrop: false, ignoreBackdropClick: true}" [style.display]="modeDisplay">
+    <div class="modal-dialog modal-frame modal-top" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row px-4">
+                    <p class="pt-2 pr-2 mr-auto ml-3"><strong>Atenttion!!</strong> you are not log in</p>
+                    <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="hideWarning();frame.hide()" mdbRippleRadius>Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div-->
+
+
+
+
+
+
+
+<!--mat-toolbar class="orange">
+
+    <app-menu></app-menu>
+    <h2 class="link" routerLink="/">Cook & look</h2>
+
+    <button mat-button class="float-right" *ngIf="!isLogin()" (click)="form.show()">Log In</button>
+    <button mat-button class="float-right " *ngIf="isLogin()" (click)="logout()">log out</button>
+    <button mat-button mdbTooltip="Read More" placement="bottom" class="float-right " routerLink="/about">about</button>
+
+
+</mat-toolbar-->
+
+
+<jaspero-alerts class="alerts" [defaultSettings]="options"></jaspero-alerts>
+
+<!--                       login                            -->
+<!--button type="button" class="btn btn-primary waves-light" (click)="form.show()" mdbRippleRadius>Login with avatar form</button-->
+<!--Modal: Login with Avatar Form-->
+<div mdbModal #form="mdb-modal" class="modal fade ground" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- -->
+    <!-- -->
+
+    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <img src='assets\\homeImg\\logo1.png' class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body text-center mb-1">
+
+                <h5 class="mt-1 mb-2">Cook & look</h5>
+
+                <div class="ml-0 mr-0 mb-2 ">
+                    <mat-form-field>
+                        <input matInput name="oldid" [(ngModel)]="oldid" placeholder="Enter User Name" style="text-align:left" required>
+
+                        <mat-error *ngIf="!oldid">
+                            This field is required
+                        </mat-error>
+                        <mat-error *ngIf="!apears(oldid)">
+                            The User Name Is Not Exist!
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+
+                <div class="options text-center text-md-right mt-1">
+                    <p>Not a member? <strong><a class="blue-text" (click)="form2.show(); form.hide()">Sign Up</a></strong></p>
+
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-cyan mt-1 waves-light" [disabled]="(!apears(oldid))||(!oldid)" mdbRippleRadius (click)="form.hide(); login()">Login <i class="fa fa-sign-in ml-1"></i></button>
+                </div>
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+<!--                       register                           -->
+<!--button type="button" class="btn btn-primary waves-light" (click)="form2.show()" mdbRippleRadius>Login with avatar form</button-->
+<!--Modal: Login with Avatar Form-->
+<div mdbModal #form2="mdb-modal" class="modal fade ground" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- -->
+    <!-- -->
+
+    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <img src='assets\\homeImg\\logo1.png' class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body text-center mb-1">
+
+                <h5 class="mt-1 mb-3">Sign Up to:</h5>
+                <h5 class="mt-1 mb-3">Cook & look</h5>
+
+                <div class="ml-0 mr-0 mb-2 ">
+                    <mat-form-field>
+                        <input matInput name="newid" [(ngModel)]="newid" placeholder="Enter New User Name" style="text-align:left" required>
+
+                        <mat-error *ngIf="!newid">
+                            This field is required
+                        </mat-error>
+                        <mat-error *ngIf="apears(newid)">
+                            The User Name Is Exist!
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <div class="container center mt-4 pt-2 pb-2">
+                        <p>
+                            Uplode Profile Image
+                        </p>
+                        <input type="file" id="imageUser">
+                        <!--class=" custom-file-control"-->
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-cyan mt-1 waves-light" mdbRippleRadius [disabled]="(apears(newid))||(!newid)" (click)="form2.hide(); signUp()">Sign In <i class="fa fa-sign-in ml-1"></i></button>
+                    </div>
+                </div>
+
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+
+<!-- mails-->
+<div mdbModal #mails="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info ground modal-frame modal-top" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Hi!</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mails.hide()">
+                      <span aria-hidden="true" class="white-text">×</span>
+                     </button>
+            </div>
+            <div class="modal-body" *ngIf="dbs.user=='demoUser'">
+                <div class="text-center">
+                    <i class="fa fa-warning fa-4x mb-3 animated rotateIn"></i>
+                    <p>You are not Login, Click "login" to get your Cook & look</p>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="(dbs.sharedRecipeList.length > 0)">
+                <div class="text-center">
+                    <i class="fa fa-info fa-4x mb-3 animated rotateIn"></i>
+                    <p>There are recipes are waiting share with you!</p>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="!(dbs.mailsForUser||dbs.user=='demoUser')">
+                <div class="text-center">
+
+                    <p>No Information</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+
+                <a type="button" class="btn btn-outline-secondary-modal" data-dismiss="modal" (click)="mails.hide()" mdbRippleRadius>close</a>
+            </div>
+        </div>
+    </div>
+</div>

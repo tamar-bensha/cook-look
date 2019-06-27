@@ -1,0 +1,80 @@
+<!--div class="center">
+    <mat-card class="fullwidth">
+        <mat-card-content>
+            <button mat-button routerLink="categories">Back</button>
+            <mat-list>
+                <h2 mat-subheader>All Recipes For Category: {{category}}</h2>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngFor="let recipe of recipeList">
+                    {{recipe.nameRecipe}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div-->
+
+
+
+
+<!--Main layout-->
+<div class="container">
+    <div class="d-flex flex-row">
+        <button type="button" class="btn btn-outline-grey mr-auto" (click)="goBack()">back
+  <i class="fa fa-backward ml-2"></i>
+</button>
+    </div>
+
+
+    <!--Page heading-->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h1-responsive">{{category}}
+                <small class="text-muted">All recipes for category {{category}}</small>
+            </h1>
+        </div>
+    </div>
+    <!--/.Page heading-->
+    <hr>
+
+    <div class="container  center" *ngIf="dbs.recipeByCategoryList.length==0">
+        <p>search...</p>
+        <mat-spinner class="center"></mat-spinner>
+    </div>
+
+    <div class="row" *ngIf="true">
+        <!--First column-->
+        <div *ngFor="let recipe of this.dbs.recipeByCategoryList" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-r" data-wow-delay="0.2s">
+
+
+            <!--Card-->
+            <div class="card view hm-zoom" [routerLink]="['/recipe-show', recipe.id]">
+
+                <!--Card image-->
+                <img class=" img-fluid " [src]='recipe.urlImg' alt="Card image cap">
+
+                <!--Card content-->
+                <div class="card-body ">
+                    <!--Title-->
+                    <h4 class="card-title ">{{recipe.nameRecipe}}</h4>
+                    <!--Text-->
+                    <p *ngIf="recipe.getFrom" class="card-text ">Recipe received from: {{recipe.getFrom}}</p>
+                    <p *ngIf="!recipe.getFrom" class="card-text ">Recipe received from: Unknown</p>
+                    <!--a class="btn btn-primary " ">Go To Recipe</a-->
+                </div>
+
+            </div>
+            <!--/.Card-->
+
+        </div>
+        <!--/.First column-->
+
+    </div>
+    <hr>
+
+
+</div>
+<!--/.Main layout-->
+
+
+<!-- --------------------------------------------------------------------------------- -->

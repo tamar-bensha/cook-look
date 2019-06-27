@@ -1,0 +1,105 @@
+<div *ngIf="nameRecipe==null&& statusDetails==1" class="center">
+  <mat-card class="center">
+      <h4 class="center">loading...</h4>
+      <mat-spinner class="center"></mat-spinner>
+
+  </mat-card>
+</div>
+
+<div *ngIf="!enable && nameRecipe!=null" class="center black white-text mt-4 pt-5 pb-5">
+  <i class="fa fa-warning fa-4x white-text mb-4"></i>
+  <p>this recipe was shared with you.</p>
+  <h4 class="center mt-3 ">You have first add this recipe to your list.</h4>
+</div>
+
+<div *ngIf="enable|| statusDetails==0" class="container">
+  
+     
+        <div class="app_button">
+          <mat-card-actions>
+            <button mat-fab (click)="form.show() "><mat-icon>grid_on</mat-icon></button>
+            <button mat-fab (click)="edit() "><mat-icon>edit</mat-icon></button>
+            <button id = "read" mat-fab (click)="sayIt() "> <mat-icon>keyboard_voice</mat-icon></button>
+          </mat-card-actions>
+        </div>
+        <div class="signup-screen" >
+        <div class="recipe">
+          <div class="divider"></div>
+         <div class="space-bot text-center">
+            <h1>{{nameRecipe}}</h1>
+            <div class="divider"></div>
+            <table>
+             <tr>
+               <td >
+                 <label *ngIf="getFrom!=''"  >Recipe received from: {{getFrom}}</label><br/><br/>
+                 <label>{{comment}}</label><br/><br/>
+                 <h6>Categories:</h6>
+                 <label>{{category1}}</label><br/>
+                 <label>{{category2}}</label><br/>
+                 <label>{{category3}}</label><br/>
+               </td>
+               <td class="col-lg-3 col-md-3 col-sm-12 col-xs-12 justify-items-center align-items-center mb-3 mt-5 ml-3"> 
+                  <img *ngIf="urlImg!='none'"  mat-card-image [src]="urlImg" style="width:300px; height:300px; object-fit:scale-down;">
+                  <img *ngIf="urlImg=='none'"  id="searchImg" src='/assets/blank.png' >   
+             </td>
+           </tr>
+           </table>
+
+           <div class="divider"></div>
+         </div>
+              <form class="form-register" method="post" name="register" novalidate>
+                <div >
+                    <h3>Ingredients</h3>
+                    <div  class="ingred">
+                      
+                        <div id='itemLine' *ngFor="let item of ingredients2; let i = index">
+                            <mat-list-item id="itemLineDetailsInSaved" > 
+                              <ul>      
+                                <li>{{get_amount(item.amount)}} {{item.unit}} {{item.product}}</li>             
+                              </ul>     
+                              </mat-list-item>
+                        </div>
+
+                
+                </div>
+                <div class="divider"></div>
+                  <h3>Instructions</h3>
+                  <div  class="Instruc">
+                     
+                      <div id='itemLine' *ngFor="let item of instructions2;  let i = index">
+                          <mat-list-item id="itemLineDetailsInSaved" > 
+                            <ul>      
+                              <li>{{item.description}}</li>             
+                            </ul>     
+                            </mat-list-item>
+                      </div>
+                  </div>
+                </div>
+              </form>
+          </div>
+           </div>
+        </div>
+    
+        <div mdbModal #form="mdb-modal" class="modal fade ground" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+            <img src='assets\\homeImg\\logo1.png' class="rounded-circle img-responsive">
+            </div>
+            <div class="modal-body text-center mb-1">
+            <h5 class="mt-1 mb-2">Cook & look</h5>
+            <br>
+            <h5 class="mt-1 mb-2">How many times would you like to double this recipe ? </h5>
+            <div class="ml-0 mr-0 mb-2 ">
+            <mat-input-container>
+            <input matInput type="number" name="nAmount1" placeholder= " Write here " style="text-align:left" [(ngModel)]="nAmount1" >
+            </mat-input-container>
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-cyan mt-1 waves-light" mdbWavesEffect (click)= "savenAmount1();form.hide()" > Save </button>
+            </div>
+            </div>
+            </div>
+            </div>
+               

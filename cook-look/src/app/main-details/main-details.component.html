@@ -1,0 +1,145 @@
+<form>
+
+
+    <div id="recipeInEdit" *ngIf="statusDetails!=1">
+        <mat-card>
+            <mat-card-content>
+                <mat-input-container class="fullwidth">
+                    <input matInput name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
+                </mat-input-container>
+                <mat-card-title>
+                    <mat-input-container class="fullwidth">
+                        <input matInput type="text" name="nameRecipe " placeholder="Name Of Recipe" [(ngModel)]="nameRecipe" required>
+                        <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
+                    </mat-input-container>
+                </mat-card-title>
+
+                <h3 class="left">Categories:</h3>
+
+                <table class="fullwidth" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-select placeholder="category 1" (change)="category1 = $event.value">
+                                    <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <mat-select placeholder="category 2" (change)="category2 = $event.value">
+                                    <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <mat-select placeholder="category 3" (change)="category3 = $event.value">
+                                    <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+
+                <mat-card *ngIf="statusDetails==0">
+                    <input type="file" id="imageFile">
+                </mat-card>
+                <mat-form-field class="fullwidth">
+                    <textarea matInput placeholder="comment" aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
+                    <mat-hint>Leave us a comment!</mat-hint>
+                    <mat-hint align="end">{{commentCount}}/{{commentMax}}</mat-hint>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-fab color="orange" (click)="saveRecipe()" [disabled]='!nameRecipe'>
+          <mat-icon>assignment_turned</mat-icon>
+        </button>
+            </mat-card-actions>
+
+
+
+
+        </mat-card>
+    </div>
+
+    <div id="recipeOnSave" *ngIf="statusDetails==1">
+        <mat-card>
+
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-4">
+                        <img mat-card-image [src]="urlImg">
+                    </div>
+                    <div class="col-8">
+
+                        <mat-card-title>
+                            <h1>{{nameRecipe}}</h1>
+                        </mat-card-title>
+                        <mat-card-subtitle *ngIf="getFrom">Recipe received from: {{getFrom}}</mat-card-subtitle>
+                        <h4>category: {{category1}} {{category2}} {{category3}}.</h4>
+                        <br><br>
+                        <p *ngIf="comment">Comment: {{comment}}</p>
+
+
+                    </div>
+                </div>
+
+                <mat-card-actions>
+                    <button mat-fab color="orange" (click)="aditDetails()">
+            <mat-icon class="mat-25" >edit</mat-icon>
+            </button>
+
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</form>
+<!--
+    <div id="recipeInAdit " *ngSwitchCase="2 ">
+        <p>code: {{code}}</p>
+
+        <br>
+        <mat-form-field>
+            <input matInput type="text" #name name="nameRecipe " placeholder="Name Of Recipe " [(ngModel)]="nameRecipe " required>
+            <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput type="text " name="getFrom " placeholder="Get Recipe From " [(ngModel)]="getFrom ">
+        </mat-form-field>
+        <br>
+
+        <h3>Categories:</h3>
+        <mat-form-field>
+            <mat-select name="category[0]" [(ngModel)]="category[0]">
+                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select name="category[1]" [(ngModel)]="category[1]">
+                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select name="category[2]" [(ngModel)]="category[2]">
+                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field><br>
+        <input type="file " name="urlImg ">
+        <br>
+        <mat-form-field>
+            <textarea matInput aria-label="Comment " name="comment " [(ngModel)]="comment " matTextareaAutosize [maxlength]="commentMax "></textarea>
+            <mat-hint>Leave us a comment!</mat-hint>
+            <mat-hint align="end ">{{commentCount}}/{{commentMax}}</mat-hint>
+        </mat-form-field>
+        <br>
+        <br>
+        <button mat-fab color="accent" (click)="saveRepice()" [disabled]='!nameRecipe'>
+          <mat-icon>save</mat-icon>
+        </button>
+    </div>
+
+    </div>
+</form>-->

@@ -1,0 +1,116 @@
+<br><br>
+<div class="container">
+    <mat-accordion color="primary">
+        <mat-expansion-panel color="primary">
+            <mat-expansion-panel-header>
+                <mat-icon>add</mat-icon>
+                <mat-panel-title>
+                    Add Categories in your app
+                </mat-panel-title>
+                <mat-panel-description>
+                    Press To Enter New Category
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-input-container class="example-form-field">
+                <input matInput type="text" placeholder="Category" #newCategory [(ngModel)]="category" name="category" />
+                <button mat-button *ngIf="category" matSuffix mat-icon-button aria-label="Clear" (click)="category=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+            </mat-input-container>
+            <br>
+            <mat-checkbox name="isFavorite" [(ngModel)]="isFavorite">Add category to favorites</mat-checkbox>
+
+            <mat-card>
+                <button [disabled]="!category" mat-raised-button (click)="addCategory()">Add Category</button>
+            </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+
+<br><br>
+<div class="container">
+    <mat-accordion color="primary">
+        <mat-expansion-panel color="primary">
+            <mat-expansion-panel-header>
+                <mat-icon>delete</mat-icon>
+                <mat-panel-title>
+                    Delete Categories from your app
+                </mat-panel-title>
+                <mat-panel-description>
+                    Press To Delete Categories
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-card>
+                <mat-list>
+                    <mat-list-item *ngFor="let cat of this.dbs.categoryList">
+                        <mat-icon mat-list-icon>category</mat-icon>
+                        <h4 mat-line>{{cat.name}}</h4>
+
+
+                        <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
+                <mat-icon>delete</mat-icon>
+            </button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </mat-card>
+
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<br><br>
+<div class="container">
+    <mat-accordion color="primary">
+        <mat-expansion-panel color="primary">
+            <mat-expansion-panel-header>
+                <mat-icon>favorite</mat-icon>
+                <mat-panel-title>
+                    Favorites Categories
+                    <mat-icon>favorite</mat-icon>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Press To Add or Move from Favorites
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-card>
+                <mat-selection-list #cats [ngModel]="selectedOptions" (ngModelChange)="onSelectedOptionsChange($event)">
+                    <h3 mat-subheader>Categories</h3>
+                    <mat-list-option [value]="cat.name" *ngFor="let cat of this.dbs.categoryList">{{cat.name}}</mat-list-option>
+                </mat-selection-list>
+            </mat-card>
+            <mat-card>
+                <p>
+                    <button mat-raised-button (click)="cats.selectAll()">Select all</button>
+                    <button mat-raised-button (click)="cats.deselectAll()">Deselect all</button>
+                </p>
+            </mat-card>
+            <p>Selected: {{selectedOptions | json}}</p>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div>
+<img class="animated bounce infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated pulse infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated headShake infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated swing infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated woble infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated jello infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated bounceInUp infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated fadeInDownBig infinite" src='assets\\homeImg\\logo1.png'>
+
+<img class="animated flipInX infinite" src='assets\\homeImg\\logo1.png'>
+
+</div>
