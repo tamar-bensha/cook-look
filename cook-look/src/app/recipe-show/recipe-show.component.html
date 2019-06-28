@@ -29,19 +29,23 @@
             <h1>{{nameRecipe}}</h1>
             <div class="divider"></div>
             <table>
+              
              <tr>
-               <td >
-                 <label *ngIf="getFrom!=''"  >Recipe received from: {{getFrom}}</label><br/><br/>
-                 <label>{{comment}}</label><br/><br/>
-                 <h6>Categories:</h6>
-                 <label>{{category1}}</label><br/>
-                 <label>{{category2}}</label><br/>
-                 <label>{{category3}}</label><br/>
-               </td>
+              
                <td class="col-lg-3 col-md-3 col-sm-12 col-xs-12 justify-items-center align-items-center mb-3 mt-5 ml-3"> 
-                  <img *ngIf="urlImg!='none'"  mat-card-image [src]="urlImg" style="width:300px; height:300px; object-fit:scale-down;">
+                  <img *ngIf="urlImg!='none'"  mat-card-image [src]="urlImg" style="position:relative; top:30px; width:50%; height:300px; object-fit:scale-down;">
                   <img *ngIf="urlImg=='none'"  id="searchImg" src='/assets/blank.png' >   
              </td>
+           </tr>
+           <tr>
+            <td >
+              <label *ngIf="getFrom!=''"  ><br/><br/>Recipe received from: {{getFrom}}</label><br/>
+              <label>{{comment}}</label><br/><br/>
+              <h6>Categories:</h6>
+              <label>{{category1}}</label><br/>
+              <label>{{category2}}</label><br/>
+              <label>{{category3}}</label><br/>
+            </td>
            </tr>
            </table>
 
