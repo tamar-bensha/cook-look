@@ -150,7 +150,7 @@ setInterval(() => {this.chackImails(); }
     this.dbs.counterRef.doc('counterInstructions').set({ counter: 0 });
     this.dbs.allUsersRef.doc(this.newid).set({ userName: this.newid, password: 1234 });
     this.setProfile();
-    this.createAlert('success', 'You Signed In Successfully!', '');
+    this.createAlert('success', 'You have signed up successfully!', '');
     this.router.navigate(['/']);
     this.newid = '';
 
@@ -159,13 +159,14 @@ setInterval(() => {this.chackImails(); }
   login() {
     this.dbs.user = this.oldid;
     this.dbs.changeUser();
-    this.createAlert('success', 'You Loged In Successfully!', '');
+    this.createAlert('success', 'You Logged In Successfully!', '');
     this.router.navigate(['/']);
     this.oldid = '';
+    this.toggleListening("reasonFieldName");
   }
   logout() {
     this.dbs.user = 'demoUser';
-    this.createAlert('success', 'You Loged Out Successfully!', '');
+    this.createAlert('success', 'You Logged Out Successfully!', '');
     this.router.navigate(['/']);
     this.dbs.changeUser();
     this.chackImails();

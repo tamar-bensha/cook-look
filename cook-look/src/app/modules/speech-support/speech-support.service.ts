@@ -4,6 +4,7 @@ import { YesNo } from './yes-no-dialog/yes-no.enum';
 import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 export interface AppWindow extends Window {
   webkitSpeechRecognition: any;
   SpeechRecognition: any;
@@ -120,6 +121,8 @@ export class SpeechSupportService {
       case "recipe list":{this.router.navigateByUrl('/recipeList'); break;}
       case "sharing":{this.router.navigateByUrl('/share'); break;}
       case "categories":{this.router.navigateByUrl('/categories'); break;}
+      case "search by product":{this.router.navigateByUrl('/search-by-keywords'); break;}
+      case "search by category":{this.router.navigateByUrl('/search-by-categories'); break;}
       default:{
         (() => { this.showDialog(this._lastResult) })();
         this.router.navigateByUrl('/voiceCommands');
