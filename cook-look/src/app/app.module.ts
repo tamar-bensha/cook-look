@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { routing } from './app.routing';
 import {JasperoAlertsModule} from '@jaspero/ng2-alerts';
 import { MatTooltipModule} from '@angular/material/tooltip';
+import { ExpensesModule } from './modules/expenses/expenses.module';  
 
 
 /*material*/
@@ -82,7 +83,7 @@ import { DataBaseService } from './services/data-base.service';
 import { RecipeService } from './services/recipe.service';
 import { AuthServiceService } from './auth-service.service';
 import { SpeechService } from './services/speech.service';
-
+import { SpeechSupportService } from './modules/speech-support/speech-support.service';
 
 import { MenuComponent } from './menu/menu.component';
 import { OldRecipeComponent } from './old-recipe/old-recipe.component';
@@ -92,6 +93,7 @@ import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RecipeShowComponent } from './recipe-show/recipe-show.component';
 import { CalComponent } from './cal/cal.component';
+import { VoiceCommandsListComponent } from './voice-commands-list/voice-commands-list.component';
 
 // import { ToastService } from 'ng-mdb-pro/pro/';
  const firebase =  {
@@ -132,7 +134,9 @@ import { CalComponent } from './cal/cal.component';
     MenuComponent,
     OldRecipeComponent,
     RecipeShowComponent,
-    CalComponent
+    CalComponent,
+    VoiceCommandsListComponent,
+	
   ],
   imports: [
     routing,
@@ -173,9 +177,10 @@ import { CalComponent } from './cal/cal.component';
     MDBBootstrapModule.forRoot(),
     JasperoAlertsModule,
     IconModule ,
-    FlexLayoutModule
+    FlexLayoutModule,
+	ExpensesModule
   ],
-  providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService],
+  providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService, SpeechSupportService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

@@ -26,7 +26,11 @@ import { RecipesForCategoryComponent } from './categories/recipes-for-category/r
 import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 import { RecipeShowComponent } from './recipe-show/recipe-show.component';
 
+import { ExpensesFormComponent } from './modules/expenses/expenses-form/expenses-form.component';
+import { VoiceCommandsListComponent } from './voice-commands-list/voice-commands-list.component';
+
 const appRoutes: Routes = [
+
 
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
@@ -42,7 +46,9 @@ const appRoutes: Routes = [
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
   { path: 'reader/:id', component: ReaderRecipeComponent },
-  { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent }
+  { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent },
+  { path: 'voiceControl', component: ExpensesFormComponent },
+  { path: 'voiceCommands', component: VoiceCommandsListComponent }
 ];
 
 export const appRoutingProviders: any[] = [];
